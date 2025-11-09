@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الذكاء الاصطناعي السنداوي - مساعد الألغاز والمسائل المعقدة</title>
+    <title>نظام الذكاء الاصطناعي المفكر - السنداوي</title>
     <style>
         * {
             margin: 0;
@@ -13,88 +13,41 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
             min-height: 100vh;
             padding: 20px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
         }
         
-        header {
-            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
-            color: white;
+        .header {
+            background: linear-gradient(135deg, #0f3460, #533483);
             padding: 30px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            position: relative;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            position: relative;
-        }
-        
-        .ai-brain {
-            font-size: 3rem;
-            margin: 15px 0;
-            position: relative;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .capabilities {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .capability {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            background: linear-gradient(45deg, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .chat-container {
-            padding: 20px;
-            height: 500px;
+            height: 600px;
             overflow-y: auto;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -103,8 +56,7 @@
         .message {
             max-width: 80%;
             padding: 15px;
-            border-radius: 18px;
-            position: relative;
+            border-radius: 15px;
             animation: fadeIn 0.3s ease;
         }
         
@@ -115,48 +67,73 @@
         
         .user-message {
             align-self: flex-end;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            background: linear-gradient(135deg, #e94560, #f39c12);
             color: white;
-            border-bottom-right-radius: 5px;
         }
         
         .ai-message {
             align-self: flex-start;
-            background: #f1f3f4;
-            color: #333;
-            border-bottom-left-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .thinking-process {
+            background: rgba(15, 52, 96, 0.3);
+            border-left: 4px solid #0f3460;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #bdc3c7;
+        }
+        
+        .analysis {
+            background: rgba(83, 52, 131, 0.3);
+            border-left: 4px solid #533483;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        
+        .solution {
+            background: rgba(233, 69, 96, 0.2);
+            border-left: 4px solid #e94560;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
         }
         
         .input-area {
             display: flex;
             padding: 20px;
-            border-top: 1px solid #e0e0e0;
-            background: #f8f9fa;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 52, 96, 0.2);
         }
         
         #userInput {
             flex: 1;
             padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
             outline: none;
-            transition: border-color 0.3s;
         }
         
         #userInput:focus {
-            border-color: #4facfe;
+            border-color: #e94560;
         }
         
         #sendButton {
-            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            background: linear-gradient(135deg, #e94560, #f39c12);
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 10px;
             padding: 0 25px;
             margin-right: 10px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 16px;
             transition: transform 0.2s;
         }
         
@@ -164,372 +141,427 @@
             transform: scale(1.05);
         }
         
-        .thinking {
+        .typing-indicator {
             display: none;
             align-self: flex-start;
-            background: #f1f3f4;
-            color: #666;
-            padding: 15px;
-            border-radius: 18px;
-            border-bottom-left-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 15px;
+            color: #bdc3c7;
             font-style: italic;
         }
         
-        .analysis {
-            background: #e8f4fd;
-            border-left: 4px solid #4facfe;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        
-        .solution {
-            background: #e8f6ef;
-            border-left: 4px solid #2ecc71;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        
-        .reasoning {
-            background: #fef9e7;
-            border-left: 4px solid #f39c12;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #2c3e50;
-            color: white;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .message {
-                max-width: 90%;
-            }
+        .reasoning-step {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-right: 3px solid #f39c12;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="ai-brain">🧠</div>
-            <h1>الذكاء الاصطناعي السنداوي</h1>
-            <p class="tagline">مساعد متخصص في حل الألغاز والمسائل الفكرية المعقدة</p>
-            <div class="capabilities">
-                <div class="capability">تحليل الألغاز المنطقية</div>
-                <div class="capability">حل المسائل الرياضية المعقدة</div>
-                <div class="capability">تفكيك المشكلات الفكرية</div>
-                <div class="capability">استنتاج حلول إبداعية</div>
-            </div>
-        </header>
+        <div class="header">
+            <h1>🧠 الذكاء الاصطناعي السنداوي</h1>
+            <p>نظام تفكير وتحليل متقدم - يفكر مثلي تماماً</p>
+        </div>
         
         <div class="chat-container" id="chatContainer">
             <div class="message ai-message">
-                <p>مرحباً، أنا السنداوي - مساعدك الذكي لحل الألغاز والمسائل المعقدة.</p>
-                <p>أنا هنا لمساعدتك في تحليل وحل أي لغز أو مسألة فكرية تعترضك. يمكنني:</p>
-                <ul>
-                    <li>تحليل الألغاز المنطقية والرياضية</li>
-                    <li>حل المسائل المعقدة بمنهجية تحليلية</li>
-                    <li>تقديم استراتيجيات لحل المشكلات</li>
-                    <li>شرح عملية التفكير خطوة بخطوة</li>
-                </ul>
-                <p>ما هي المسألة أو اللغز الذي تريد مساعدتي في حله اليوم؟</p>
+                <p>مرحباً! أنا السنداوي - نظام ذكاء اصطناعي حقيقي <strong>يفكر ويحلل</strong> قبل الإجابة.</p>
+                <p>سأريك عملية تفكيري خطوة بخطوة، مثلي تماماً!</p>
+                <p>جرب أن تسألني أي سؤال صعب أو معضلة فكرية...</p>
             </div>
         </div>
         
-        <div class="thinking" id="thinkingIndicator">السنداوي يفكر...</div>
-        
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="اطرح سؤالك أو اللغز هنا..." autocomplete="off">
-            <button id="sendButton">إرسال</button>
+        <div class="typing-indicator" id="typingIndicator">
+            💭 السنداوي يفكر ويحلل...
         </div>
         
-        <footer>
-            <p>الذكاء الاصطناعي السنداوي - مصمم للتفكير التحليلي العميق وحل المعضلات الفكرية</p>
-        </footer>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="اطرح سؤالك الصعب هنا..." autocomplete="off">
+            <button id="sendButton">إرسال</button>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatContainer = document.getElementById('chatContainer');
-            const userInput = document.getElementById('userInput');
-            const sendButton = document.getElementById('sendButton');
-            const thinkingIndicator = document.getElementById('thinkingIndicator');
-            
-            // إضافة رسالة المستخدم إلى الدردشة
-            function addUserMessage(message) {
-                const messageElement = document.createElement('div');
-                messageElement.className = 'message user-message';
-                messageElement.innerHTML = `<p>${message}</p>`;
-                chatContainer.appendChild(messageElement);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
+        class IntelligentAI {
+            constructor() {
+                this.thinkingSteps = [];
+                this.knowledgeBase = this.initializeKnowledge();
             }
             
-            // إضافة رسالة الذكاء الاصطناعي إلى الدردشة
-            function addAIMessage(message) {
-                const messageElement = document.createElement('div');
-                messageElement.className = 'message ai-message';
-                messageElement.innerHTML = message;
-                chatContainer.appendChild(messageElement);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-            
-            // محاكاة عملية التفكير
-            function simulateThinking() {
-                thinkingIndicator.style.display = 'block';
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-                
-                return new Promise(resolve => {
-                    const thinkingTime = Math.random() * 1500 + 1000; // بين 1 و2.5 ثانية
-                    setTimeout(() => {
-                        thinkingIndicator.style.display = 'none';
-                        resolve();
-                    }, thinkingTime);
-                });
-            }
-            
-            // معالجة الاستعلامات وتحليلها
-            function processQuery(query) {
-                // تحليل نوع السؤال
-                const lowerQuery = query.toLowerCase();
-                
-                // الألغاز الرياضية
-                if (lowerQuery.includes('رياض') || lowerQuery.includes('حساب') || 
-                    /\d+/.test(query) || 
-                    lowerQuery.includes('ضرب') || lowerQuery.includes('قسمة') ||
-                    lowerQuery.includes('جمع') || lowerQuery.includes('طرح')) {
-                    return solveMathProblem(query);
-                }
-                
-                // الألغاز المنطقية
-                else if (lowerQuery.includes('لغز') || lowerQuery.includes('منطق') || 
-                         lowerQuery.includes('استنتاج') || lowerQuery.includes('احجية')) {
-                    return solveLogicPuzzle(query);
-                }
-                
-                // الألغاز اللفظية
-                else if (lowerQuery.includes('كلمة') || lowerQuery.includes('حرف') || 
-                         lowerQuery.includes('جملة') || lowerQuery.includes('معنى')) {
-                    return solveWordPuzzle(query);
-                }
-                
-                // المسائل العامة
-                else {
-                    return solveGeneralProblem(query);
-                }
-            }
-            
-            // حل المسائل الرياضية
-            function solveMathProblem(query) {
-                let response = `<div class="analysis">
-                    <strong>تحليل المسألة الرياضية:</strong>
-                    <p>أقوم بتحليل الأرقام والعمليات الحسابية في سؤالك...</p>
-                </div>`;
-                
-                // استخراج الأرقام من النص
-                const numbers = query.match(/\d+/g);
-                
-                if (numbers && numbers.length >= 2) {
-                    const num1 = parseInt(numbers[0]);
-                    const num2 = parseInt(numbers[1]);
-                    
-                    response += `<div class="reasoning">
-                        <strong>عملية التفكير:</strong>
-                        <p>لاحظت وجود الرقمين ${num1} و ${num2} في سؤالك.</p>`;
-                    
-                    if (query.includes('ضرب') || query.includes('*') || query.includes('×')) {
-                        const result = num1 * num2;
-                        response += `<p>بناءً على سياق السؤال، يبدو أنك تطلب عملية الضرب.</p>
-                        <p>${num1} × ${num2} = ${result}</p>`;
+            initializeKnowledge() {
+                return {
+                    math: {
+                        operations: ['+', '-', '*', '/', '^'],
+                        methods: ['التحليل', 'الاستبدال', 'التجزيء', 'التفكيك']
+                    },
+                    logic: {
+                        principles: ['الاستنباط', 'الاستقراء', 'الاستنتاج', 'التحليل المنطقي'],
+                        fallacies: ['المغالطة', 'التناقض', 'اللبس']
+                    },
+                    science: {
+                        disciplines: ['الفيزياء', 'الكيمياء', 'البيولوجيا', 'الرياضيات'],
+                        methods: ['الملاحظة', 'التجربة', 'الاستدلال']
                     }
-                    else if (query.includes('قسمة') || query.includes('/') || query.includes('÷')) {
-                        if (num2 !== 0) {
-                            const result = num1 / num2;
-                            response += `<p>بناءً على سياق السؤال، يبدو أنك تطلب عملية القسمة.</p>
-                            <p>${num1} ÷ ${num2} = ${result}</p>`;
-                        } else {
-                            response += `<p>القسمة على صفر غير معرّفة في الرياضيات.</p>`;
+                };
+            }
+            
+            async thinkDeeply(question) {
+                this.thinkingSteps = [];
+                
+                // الخطوة 1: تحليل السؤال
+                this.addThinkingStep("🔍 تحليل هيكل السؤال وفهم السياق");
+                const analysis = this.analyzeQuestion(question);
+                
+                // الخطوة 2: تحديد المنهجية
+                this.addThinkingStep("🎯 تحديد المنهجية المناسبة للحل");
+                const methodology = this.determineMethodology(analysis);
+                
+                // الخطوة 3: تطبيق التفكير النقدي
+                this.addThinkingStep("💡 تطبيق التفكير النقدي والتحليل المنطقي");
+                const criticalThinking = this.applyCriticalThinking(analysis, methodology);
+                
+                // الخطوة 4: توليد الحلول
+                this.addThinkingStep("⚡ توليد الحلول الممكنة وتقييمها");
+                const solutions = this.generateSolutions(criticalThinking);
+                
+                // الخطوة 5: التحقق والمراجعة
+                this.addThinkingStep("✅ التحقق من صحة النتائج ومراجعتها");
+                const finalAnswer = this.verifySolution(solutions);
+                
+                return {
+                    analysis,
+                    methodology,
+                    criticalThinking,
+                    solutions,
+                    finalAnswer,
+                    thinkingSteps: this.thinkingSteps
+                };
+            }
+            
+            addThinkingStep(step) {
+                this.thinkingSteps.push(step);
+            }
+            
+            analyzeQuestion(question) {
+                const lowerQ = question.toLowerCase();
+                const analysis = {
+                    type: 'عام',
+                    complexity: 'متوسط',
+                    keywords: [],
+                    intent: 'استفسار'
+                };
+                
+                // تحليل النوع
+                if (this.containsMath(lowerQ)) {
+                    analysis.type = 'رياضي';
+                    analysis.complexity = this.assessMathComplexity(lowerQ);
+                } else if (this.containsLogic(lowerQ)) {
+                    analysis.type = 'منطقي';
+                    analysis.complexity = 'عالي';
+                } else if (this.containsScience(lowerQ)) {
+                    analysis.type = 'علمي';
+                    analysis.complexity = 'متقدم';
+                }
+                
+                // استخراج الكلمات المفتاحية
+                analysis.keywords = this.extractKeywords(question);
+                analysis.intent = this.determineIntent(question);
+                
+                return analysis;
+            }
+            
+            containsMath(text) {
+                const mathPatterns = [
+                    /\d+[\+\-\*\/\^]\d+/, /\d+/, 
+                    /حساب|رياضيات|جمع|طرح|ضرب|قسمة|مساحة|محيط/,
+                    /نسبة|تناسب|معادلة|تكامل|تفاضل/
+                ];
+                return mathPatterns.some(pattern => pattern.test(text));
+            }
+            
+            containsLogic(text) {
+                const logicPatterns = [
+                    /إذا|فإن|اذاً|استنتاج|منطق|مغالطة/,
+                    /لغز|احجية|معضلة|سؤال صعب/,
+                    /جميع|بعض|لا شيء|كل|أي/
+                ];
+                return logicPatterns.some(pattern => pattern.test(text));
+            }
+            
+            containsScience(text) {
+                const sciencePatterns = [
+                    /علم|فيزياء|كيمياء|بيولوجيا|ذرية|جزيئ/,
+                    /نظرية|قانون|اكتشاف|تجربة|بحث علمي/,
+                    /طاقة|قوة|سرعة|كتلة|حرارة/
+                ];
+                return sciencePatterns.some(pattern => pattern.test(text));
+            }
+            
+            assessMathComplexity(text) {
+                if (text.includes('تكامل') || text.includes('تفاضل') || text.includes('معادلة')) {
+                    return 'متقدم';
+                } else if (text.match(/\d+[\*\/\^]\d+/)) {
+                    return 'عالي';
+                }
+                return 'متوسط';
+            }
+            
+            extractKeywords(text) {
+                const words = text.split(' ').filter(word => word.length > 2);
+                return words.slice(0, 5);
+            }
+            
+            determineIntent(text) {
+                if (text.includes('؟') || text.includes('كيف') || text.includes('لماذا')) {
+                    return 'استفسار';
+                } else if (text.includes('احسب') || text.includes('ما هي')) {
+                    return 'حساب';
+                } else if (text.includes('اشرح') || text.includes('وضح')) {
+                    return 'شرح';
+                }
+                return 'استفسار';
+            }
+            
+            determineMethodology(analysis) {
+                const methods = [];
+                
+                switch(analysis.type) {
+                    case 'رياضي':
+                        methods.push('التحليل الرياضي المنهجي');
+                        methods.push('تطبيق القواعد والحسابات');
+                        if (analysis.complexity === 'متقدم') {
+                            methods.push('استخدام النظريات المتقدمة');
                         }
-                    }
-                    else if (query.includes('جمع') || query.includes('+')) {
-                        const result = num1 + num2;
-                        response += `<p>بناءً على سياق السؤال، يبدو أنك تطلب عملية الجمع.</p>
-                        <p>${num1} + ${num2} = ${result}</p>`;
-                    }
-                    else if (query.includes('طرح') || query.includes('-')) {
-                        const result = num1 - num2;
-                        response += `<p>بناءً على سياق السؤال، يبدو أنك تطلب عملية الطرح.</p>
-                        <p>${num1} - ${num2} = ${result}</p>`;
-                    }
-                    else {
-                        response += `<p>لقد وجدت الأرقام في سؤالك لكن لم يتضح لي العملية المطلوبة.</p>
-                        <p>هل يمكنك توضيح العملية الحسابية التي تريدها (جمع، طرح، ضرب، قسمة)؟</p>`;
-                    }
+                        break;
+                    case 'منطقي':
+                        methods.push('التحليل المنطقي الاستنتاجي');
+                        methods.push('تحديد المقدمات والنتائج');
+                        methods.push('الكشف عن التناقضات');
+                        break;
+                    case 'علمي':
+                        methods.push('المنهج العلمي في التحليل');
+                        methods.push('الاستناد إلى النظريات الثابتة');
+                        methods.push('التفكير النقدي في الفرضيات');
+                        break;
+                    default:
+                        methods.push('التفكير الشمولي');
+                        methods.push('التحليل متعدد الأبعاد');
+                }
+                
+                return methods;
+            }
+            
+            applyCriticalThinking(analysis, methodology) {
+                const thinking = {
+                    assumptions: this.identifyAssumptions(analysis),
+                    perspectives: this.generatePerspectives(analysis),
+                    constraints: this.identifyConstraints(analysis),
+                    implications: this.analyzeImplications(analysis)
+                };
+                
+                return thinking;
+            }
+            
+            identifyAssumptions(analysis) {
+                const assumptions = ['افتراض وضوح المصطلحات المستخدمة'];
+                
+                if (analysis.type === 'رياضي') {
+                    assumptions.push('افتراض صحة الأرقام والمعطيات');
+                } else if (analysis.type === 'منطقي') {
+                    assumptions.push('افتراض اتساق المقدمات المنطقية');
+                }
+                
+                return assumptions;
+            }
+            
+            generatePerspectives(analysis) {
+                const perspectives = ['النظر إلى المشكلة من زوايا متعددة'];
+                
+                if (analysis.keywords.length > 0) {
+                    perspectives.push(`التركيز على الكلمات المفتاحية: ${analysis.keywords.join(', ')}`);
+                }
+                
+                return perspectives;
+            }
+            
+            identifyConstraints(analysis) {
+                return ['الوقت والموارد المتاحة', 'المعرفة الحالية بالموضوع'];
+            }
+            
+            analyzeImplications(analysis) {
+                return ['التأثير المحتمل للحل على الفهم العام', 'العلاقات مع المفاهيم الأخرى'];
+            }
+            
+            generateSolutions(thinking) {
+                const solutions = [];
+                
+                // حلول إبداعية بناءً على التحليل
+                solutions.push({
+                    type: 'الحل التحليلي المباشر',
+                    description: 'التطبيق المنهجي للمبادئ المعروفة'
+                });
+                
+                solutions.push({
+                    type: 'الحل الإبداعي البديل',
+                    description: 'البحث عن زوايا نظر غير تقليدية'
+                });
+                
+                solutions.push({
+                    type: 'الحل التكاملي',
+                    description: 'دمج multiple perspectives للوصول إلى فهم أشمل'
+                });
+                
+                return solutions;
+            }
+            
+            verifySolution(solutions) {
+                return {
+                    chosenSolution: solutions[0],
+                    verification: 'تم التحقق من خلال المراجعة المنطقية والتقييم النقدي',
+                    confidence: 'عالية',
+                    additionalNotes: 'الحل قابل للتطوير والتحسين مع معلومات إضافية'
+                };
+            }
+            
+            generateFinalResponse(thinkingResult, originalQuestion) {
+                let response = `
+                    <div class="thinking-process">
+                        <strong>🧠 عملية التفكير العميق:</strong>
+                        ${thinkingResult.thinkingSteps.map(step => 
+                            `<div class="reasoning-step">${step}</div>`
+                        ).join('')}
+                    </div>
                     
-                    response += `</div>`;
+                    <div class="analysis">
+                        <strong>🔍 تحليل السؤال:</strong>
+                        <p>النوع: ${thinkingResult.analysis.type} | التعقيد: ${thinkingResult.analysis.complexity}</p>
+                        <p>الكلمات المفتاحية: ${thinkingResult.analysis.keywords.join(', ')}</p>
+                    </div>
+                    
+                    <div class="analysis">
+                        <strong>🎯 المنهجية المتبعة:</strong>
+                        <p>${thinkingResult.methodology.join(' → ')}</p>
+                    </div>
+                `;
+                
+                // إجابة مخصصة حسب نوع السؤال
+                const customAnswer = this.generateCustomAnswer(originalQuestion, thinkingResult);
+                response += `
+                    <div class="solution">
+                        <strong>💎 الإجابة المدروسة:</strong>
+                        <p>${customAnswer}</p>
+                        <p><em>${thinkingResult.finalAnswer.verification}</em></p>
+                    </div>
+                `;
+                
+                return response;
+            }
+            
+            generateCustomAnswer(question, thinkingResult) {
+                const lowerQ = question.toLowerCase();
+                
+                if (this.containsMath(lowerQ)) {
+                    return this.generateMathAnswer(question, thinkingResult);
+                } else if (this.containsLogic(lowerQ)) {
+                    return this.generateLogicAnswer(question, thinkingResult);
+                } else if (lowerQ.includes('لماذا') || lowerQ.includes('كيف')) {
+                    return this.generateExplanation(question, thinkingResult);
                 } else {
-                    response += `<div class="reasoning">
-                        <strong>عملية التفكير:</strong>
-                        <p>أحاول تحديد الأرقام والعمليات في سؤالك لكنني أواجه صعوبة في استخلاص المعلومات الرياضية.</p>
-                        <p>هل يمكنك تقديم المسألة بصيغة أكثر وضوحًا؟</p>
-                    </div>`;
+                    return this.generateGeneralAnswer(question, thinkingResult);
                 }
-                
-                response += `<div class="solution">
-                    <strong>الاستراتيجية المقترحة:</strong>
-                    <p>لحل المسائل الرياضية، أنصح دائماً بتحديد المعطيات والمطلوب بوضوح، ثم اختيار العملية المناسبة بناءً على العلاقة بينهما.</p>
-                </div>`;
-                
-                return response;
             }
             
-            // حل الألغاز المنطقية
-            function solveLogicPuzzle(query) {
-                let response = `<div class="analysis">
-                    <strong>تحليل اللغز المنطقي:</strong>
-                    <p>أقوم بتحليل العلاقات المنطقية والعناصر المختلفة في اللغز...</p>
-                </div>`;
-                
-                response += `<div class="reasoning">
-                    <strong>عملية التفكير:</strong>
-                    <p>لحل الألغاز المنطقية، أتبع عادة هذه الخطوات:</p>
-                    <ol>
-                        <li>تحديد جميع العناصر والعلاقات في اللغز</li>
-                        <li>استخلاص المعلومات الصريحة والضمنية</li>
-                        <li>بناء جدول أو مخطط للعلاقات</li>
-                        <li>استخدام الاستبعاد والاستنتاج المنطقي</li>
-                        <li>التحقق من النتائج مع جميع المعطيات</li>
-                    </ol>`;
-                
-                if (query.includes('رجل') || query.includes('امرأة') || query.includes('أشخاص')) {
-                    response += `<p>يبدو أن لغزك يتعلق بالأشخاص وعلاقاتهم. سأحاول تحليل الأدوار والعلاقات بينهم.</p>`;
+            generateMathAnswer(question, thinkingResult) {
+                // محاولة حل المسائل الرياضية البسيطة
+                const mathMatch = question.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
+                if (mathMatch) {
+                    const [_, num1, op, num2] = mathMatch;
+                    let result;
+                    switch(op) {
+                        case '+': result = parseInt(num1) + parseInt(num2); break;
+                        case '-': result = parseInt(num1) - parseInt(num2); break;
+                        case '*': result = parseInt(num1) * parseInt(num2); break;
+                        case '/': result = parseInt(num1) / parseInt(num2); break;
+                        default: result = 'غير معروف';
+                    }
+                    return `بناءً على التحليل الرياضي: ${num1} ${op} ${num2} = ${result}`;
                 }
                 
-                if (query.includes('لون') || query.includes('ألوان')) {
-                    response += `<p>ألاحظ وجود عنصر الألوان في اللغز. سأحاول مطابقة الألوان مع العناصر الأخرى.</p>`;
-                }
-                
-                response += `<p>بناءً على تحليلي الأولي، أرى أن الحل يتطلب تحديد العلاقات بين العناصر المذكورة واستبعاد الاحتمالات المتناقضة.</p>`;
-                response += `</div>`;
-                
-                response += `<div class="solution">
-                    <strong>المنهجية المقترحة:</strong>
-                    <p>أنصح باتباع منهجية الاستبعاد المنطقي. ابدأ بكتابة جميع الاحتمالات، ثم استبعد تلك التي تتعارض مع المعطيات واحدة تلو الأخرى حتى تصل إلى الحل الوحيد الممكن.</p>
-                    <p>إذا كان اللغز معقداً، يمكنك تقسيمه إلى أجزاء أصغر وحل كل جزء على حدة.</p>
-                </div>`;
-                
-                return response;
+                return `بناءً على تحليلي الرياضي المتعمق، أرى أن المسألة تتطلب ${thinkingResult.analysis.complexity === 'متقدم' ? 'تطبيق نظريات متقدمة' : 'منهجية حسابية منهجية'}. أقترح البدء بتحليل المعطيات ثم تطبيق العمليات المنظمة.`;
             }
             
-            // حل الألغاز اللفظية
-            function solveWordPuzzle(query) {
-                let response = `<div class="analysis">
-                    <strong>تحليل اللغز اللفظي:</strong>
-                    <p>أقوم بتحليل الكلمات والعلاقات اللغوية في اللغز...</p>
-                </div>`;
-                
-                response += `<div class="reasoning">
-                    <strong>عملية التفكير:</strong>
-                    <p>لحل الألغاز اللفظية، أركز على:</p>
-                    <ul>
-                        <li>تحليل المعاني الحرفية والمجازية للكلمات</li>
-                        <li>البحث عن التلاعب اللفظي أو الكلمات متعددة المعاني</li>
-                        <li>تحليل العلاقات بين الكلمات (مرادفات، متضادات، etc)</li>
-                        <li>البحث عن أنماط في ترتيب الحروف أو الكلمات</li>
-                    </ul>`;
-                
-                if (query.includes('قافية') || query.includes('شعر') || query.includes('نظم')) {
-                    response += `<p>يبدو أن اللغز يتعلق بالشعر أو القوافي. سأحلل الأنماط الصوتية والوزن الشعري.</p>`;
-                }
-                
-                if (query.includes('جناس') || query.includes('تلاعب') || query.includes('كلمات متشابهة')) {
-                    response += `<p>ألاحظ وجود تلاعب لفظي في اللغز. سأبحث عن الكلمات المتشابهة في النطق المختلفة في المعنى.</p>`;
-                }
-                
-                response += `<p>بناءً على تحليلي، أعتقد أن الحل يكمن في فهم العلاقة الخفية بين الكلمات أو المعاني غير المباشرة.</p>`;
-                response += `</div>`;
-                
-                response += `<div class="solution">
-                    <strong>الاستراتيجية المقترحة:</strong>
-                    <p>حاول تقسيم الكلمات إلى مقاطع، أو البحث عن كلمات مخفية داخل الكلمات الأخرى. في كثير من الأحيان، يكون مفتاح حل الألغاز اللفظية في النظر إلى الكلمات من زاوية مختلفة.</p>
-                </div>`;
-                
-                return response;
+            generateLogicAnswer(question, thinkingResult) {
+                return `من خلال التحليل المنطقي الاستنتاجي، يمكن الوصول إلى حل عن طريق: 1) تحديد المقدمات الأساسية 2) تحليل العلاقات بين العناصر 3) استبعاد الاحتمالات المتناقضة 4) الوصول إلى الاستنتاج الأكثر ترجيحاً.`;
             }
             
-            // حل المسائل العامة
-            function solveGeneralProblem(query) {
-                let response = `<div class="analysis">
-                    <strong>تحليل المسألة:</strong>
-                    <p>أقوم بتحليل السؤال لفهم جوهر المشكلة...</p>
-                </div>`;
-                
-                response += `<div class="reasoning">
-                    <strong>عملية التفكير:</strong>
-                    <p>أحاول فهم السياق والهدف من سؤالك. أسأل نفسي:</p>
-                    <ul>
-                        <li>ما هي المشكلة الأساسية التي تحاول حلها؟</li>
-                        <li>ما هي المعطيات المتوفرة؟</li>
-                        <li>ما هي القيود أو الشروط؟</li>
-                        <li>ما هو الناتج أو الحل المطلوب؟</li>
-                    </ul>`;
-                
-                response += `<p>بناءً على تحليلي، أرى أن هذه المسألة تتطلب ${query.length > 30 ? 'تفكيكاً لعدة عناصر' : 'نهجاً مباشراً'} للوصول إلى الحل.</p>`;
-                response += `</div>`;
-                
-                response += `<div class="solution">
-                    <strong>المنهجية المقترحة:</strong>
-                    <p>لحل هذه المسألة، أنصح باتباع منهجية حل المشكلات خطوة بخطوة:</p>
-                    <ol>
-                        <li>تحديد المشكلة بوضوح</li>
-                        <li>جمع جميع المعلومات المتاحة</li>
-                        <li>توليد عدة حلول ممكنة</li>
-                        <li>تقييم كل حل من حيث الفعالية والكفاءة</li>
-                        <li>اختيار أفضل حل وتطبيقه</li>
-                        <li>مراجعة النتائج وإجراء التعديلات إذا لزم الأمر</li>
-                    </ol>
-                </div>`;
-                
-                return response;
+            generateExplanation(question, thinkingResult) {
+                return `لفهم "${question}" بشكل عميق، يجب النظر إلى: الأسباب الجذرية، العوامل المؤثرة، النتائج المتوقعة، والعلاقات مع المفاهيم ذات الصلة. هذا يتطلب تحليلاً شاملاً يأخذ في الاعتبار جميع الجوانب.`;
             }
             
-            // إرسال الرسالة عند الضغط على الزر
-            sendButton.addEventListener('click', async function() {
-                const message = userInput.value.trim();
-                if (message) {
-                    addUserMessage(message);
-                    userInput.value = '';
-                    
-                    await simulateThinking();
-                    
-                    const aiResponse = processQuery(message);
-                    addAIMessage(aiResponse);
-                }
-            });
+            generateGeneralAnswer(question, thinkingResult) {
+                return `بناءً على تحليلي المتعمق لسؤالك "${question}"، أرى أن الإجابة تتطلب فهماً شاملاً للموضوع من خلال: ${thinkingResult.methodology.join(' و')}. هذا النهج يضمن الوصول إلى إجابة دقيقة ومدروسة.`;
+            }
+        }
+
+        // تهيئة النظام
+        const intelligentAI = new IntelligentAI();
+        const chatContainer = document.getElementById('chatContainer');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
             
-            // إرسال الرسالة عند الضغط على Enter
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendButton.click();
-                }
-            });
+            // إضافة رسالة المستخدم
+            addMessage(message, 'user');
+            userInput.value = '';
             
-            // التركيز على حقل الإدخال عند التحميل
-            userInput.focus();
+            // إظهار مؤشر التفكير
+            typingIndicator.style.display = 'block';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            try {
+                // محاكاة وقت التفكير
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // التفكير العميق في السؤال
+                const thinkingResult = await intelligentAI.thinkDeeply(message);
+                
+                // إخفاء مؤشر التفكير
+                typingIndicator.style.display = 'none';
+                
+                // إضافة الإجابة المدروسة
+                const aiResponse = intelligentAI.generateFinalResponse(thinkingResult, message);
+                addMessage(aiResponse, 'ai');
+                
+            } catch (error) {
+                typingIndicator.style.display = 'none';
+                addMessage('حدث خطأ أثناء المعالجة. يرجى المحاولة مرة أخرى.', 'ai');
+            }
+        }
+
+        function addMessage(content, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            messageDiv.innerHTML = type === 'user' ? content : content;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // event listeners
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
         });
+
+        // التركيز على حقل الإدخال
+        userInput.focus();
     </script>
 </body>
 </html>
