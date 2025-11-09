@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>موقع رياضي ثلاثي الأبعاد</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #graph, #threeCanvas {
+      width: 80vw;
+      height: 60vh;
+      margin: 20px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #ff9800;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e68900;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 موقع رسم المعادلات والقطوع + أشكال ثلاثية الأبعاد</h1>
+  <input type="text" id="equation" placeholder="اكتب المعادلة مثل: y = x^2 أو x^2/4 + y^2/9 = 1" />
+  <button onclick="drawEquation()">ارسم المعادلة</button>
+  <div id="graph"></div>
+  <div id="threeCanvas"></div>
+
+  <script>
+    function drawEquation() {
+      const eqInput = document.getElementById("equation").value.trim();
+      const xValues = [];
+      const yValues = [];
+
+      if (eqInput.includes("=") && eqInput.includes("x") && eqInput.includes("y")) {
+        // معادلة قطوع مثل x^2/a^2 + y^2/b^2 = 1
+        const parts = eqInput.split("=");
+        const lhs = parts[0];
+        const rhs = parseFloat(parts[1]);
+
+        for (let x = -10; x <= 10; x += 0.1) {
+          try {
+            const scope = { x };
+            const temp = rhs - math.evaluate(lhs.replace(/y/g, "0"), scope);
+            if (temp >= 0) {
+              const y = Math.sqrt(temp);
+              xValues.push(x);
+              yValues.push(y);
+              xValues.push(x);
+              yValues.push(-y);
+            }
+          } catch (err) {
+            alert("خطأ في المعادلة! تأكد من الصيغة.");
+            return;
+          }
+        }
+      } else {
+        // معادلة من الشكل y = f(x)
+        const expr = eqInput.replace("y=", "").trim();
+        for (let x = -10; x <= 10; x += 0.1) {
+          try {
+            const scope = { x };
+            const y = math.evaluate(expr, scope);
+            xValues.push(x);
+            yValues.push(y);
+          } catch (err) {
+            alert("خطأ في المعادلة! تأكد من الصيغة.");
+            return;
+          }
+        }
+      }
+
+      const trace = {
+        x: xValues,
+        y: yValues,
+        mode: 'lines',
+        type: 'scatter',
+        line: { color: 'orange', width: 3 }
+      };
+
+      const layout = {
+        title: '📈 رسم المعادلة',
+        paper_bgcolor: '#f0f0f0',
+        plot_bgcolor: '#ffffff',
+        xaxis: { title: 'x' },
+        yaxis: { title: 'y' }
+      };
+
+      Plotly.newPlot('graph', [trace], layout);
+    }
+
+    // Three.js: شكل ثلاثي الأبعاد متحرك
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 0.8, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.6);
+    documentconst geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+    const material = new THREE.MeshStandardMaterial({ color: 0xff9800, metalness: 0.5, roughness: 0.3 });
+    const torus = new THREE.Mesh(geometry, material);
+    scene.add(torus);
+const light = new THREE.PointLight(0xffffff, 1);
+light.position.set(5, 5, 5);
+scene.add(light);
+
+camera.position.z = 5;
+
+function animate() {
+  requestAnimationFrame(animate);
+  torus.rotation.x += 0.01;
+  torus.rotation.y += 0.01;
+  renderer.render(scene, camera);
+}
+animate();
+
+
+  </script>
+</body>
+</html>
