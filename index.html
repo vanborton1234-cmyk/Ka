@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>العاصفة - المنصة التفاعلية</title>
+    <title>العاصفة 🌪️</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* أنماط CSS الأساسية */
@@ -546,19 +546,131 @@
             color: white;
         }
         
+        /* صفحة الحسابات */
+        .accounts-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .accounts-box {
+            background: linear-gradient(135deg, #0F0F23, #1A1A2E);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--primary-color);
+            text-align: center;
+        }
+        
+        .accounts-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px rgba(74, 0, 224, 0.5);
+        }
+        
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .account-card {
+            background: linear-gradient(135deg, rgba(74, 0, 224, 0.7), rgba(142, 45, 226, 0.7));
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+        
+        .account-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .account-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .account-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .close-accounts {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .close-accounts:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 0, 224, 0.6);
+        }
+        
+        /* شريط تذكير الصلاة */
+        .prayer-reminder {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #4A00E0, #8E2DE2);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+            z-index: 1500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .prayer-reminder.show {
+            transform: translateY(0);
+        }
+        
+        .close-prayer {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
         /* ألوان متنوعة للقنوات */
         .channel-card:nth-child(1) { background: linear-gradient(135deg, #4A00E0, #8E2DE2); }
         .channel-card:nth-child(2) { background: linear-gradient(135deg, #00B4DB, #0083B0); }
         .channel-card:nth-child(3) { background: linear-gradient(135deg, #00F260, #0575E6); }
-        .channel-card:nth-child(4) { background: linear-gradient(135deg, #F79D00, #FF512F); }
-        .channel-card:nth-child(5) { background: linear-gradient(135deg, #8E2DE2, #4A00E0); }
-        .channel-card:nth-child(6) { background: linear-gradient(135deg, #FF512F, #F79D00); }
-        .channel-card:nth-child(7) { background: linear-gradient(135deg, #0575E6, #00F260); }
-        .channel-card:nth-child(8) { background: linear-gradient(135deg, #0083B0, #00B4DB); }
-        .channel-card:nth-child(9) { background: linear-gradient(135deg, #FF512F, #F79D00); }
-        .channel-card:nth-child(10) { background: linear-gradient(135deg, #4A00E0, #8E2DE2); }
-        .channel-card:nth-child(11) { background: linear-gradient(135deg, #00F260, #0575E6); }
-        .channel-card:nth-child(12) { background: linear-gradient(135deg, #0083B0, #00B4DB); }
         
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -623,6 +735,10 @@
                 height: 50px;
                 font-size: 20px;
             }
+            
+            .accounts-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -649,7 +765,7 @@
         </button>
         
         <h1 class="site-title">العاصفة</h1>
-        <p class="site-subtitle">منصة تفاعلية متكاملة تجمع بين المعرفة والإبداع والتكنولوجيا</p>
+        <p class="site-subtitle">🌪️ موقع يجمع بين  الإبداع والتكنولوجيا</p>
     </div>
 
     <!-- شبكة القنوات المعدلة -->
@@ -742,8 +858,30 @@
     </div>
 </div>
 
+<!-- صفحة الحسابات -->
+<div class="accounts-container" id="accountsContainer">
+    <div class="accounts-box">
+        <h2 class="accounts-title">حساباتي</h2>
+        <div class="accounts-grid" id="accountsGrid">
+            <!-- سيتم إضافة الحسابات ديناميكياً -->
+        </div>
+        <button class="close-accounts" id="closeAccounts">إغلاق</button>
+    </div>
+</div>
+
+<!-- شريط تذكير الصلاة -->
+<div class="prayer-reminder" id="prayerReminder">
+    <button class="close-prayer" id="closePrayer">
+        <i class="fas fa-times"></i>
+    </button>
+    هل صليت اليوم على محمد وآل محمد؟ 🌹
+</div>
+
 <!-- الأزرار العائمة -->
 <div class="floating-buttons">
+    <button class="floating-btn" id="accountsBtn">
+        <i class="fas fa-user"></i>
+    </button>
     <button class="floating-btn" id="refreshBtn">
         <i class="fas fa-sync-alt"></i>
     </button>
@@ -823,6 +961,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initNetworkMonitoring();
         initChannels();
         initStats();
+        initPrayerReminder();
     }
 });
 
@@ -833,7 +972,13 @@ const networkStatus = document.getElementById('networkStatus');
 const refreshBtn = document.getElementById('refreshBtn');
 const themeBtn = document.getElementById('themeBtn');
 const infoBtn = document.getElementById('infoBtn');
+const accountsBtn = document.getElementById('accountsBtn');
 const channelsGrid = document.getElementById('channelsGrid');
+const accountsContainer = document.getElementById('accountsContainer');
+const accountsGrid = document.getElementById('accountsGrid');
+const closeAccounts = document.getElementById('closeAccounts');
+const prayerReminder = document.getElementById('prayerReminder');
+const closePrayer = document.getElementById('closePrayer');
 const usersCount = document.getElementById('usersCount');
 const channelsCount = document.getElementById('channelsCount');
 const contentCount = document.getElementById('contentCount');
@@ -843,64 +988,28 @@ const speedCount = document.getElementById('speedCount');
 function initChannels() {
     const channels = [
         {
-            name: "بصمة المعرفة",
-            description: "شروحات تعليمية في مختلف المجالات",
-            icon: "fas fa-graduation-cap"
+            name: "مشغل الفيديو المتقدم",
+            description: "مشغل فيديو يوتيوب بتقنيات متطورة وجودة عالية",
+            icon: "fas fa-play-circle",
+            action: function() {
+                window.open('video-player.html', '_blank');
+            }
         },
         {
-            name: "كنوز العلم",
-            description: "مكتبة شاملة للمعارف والعلوم",
-            icon: "fas fa-book"
+            name: "البوت التعليمي",
+            description: "بوت تعليمي متقدم مع خصائص متنوعة",
+            icon: "fas fa-robot",
+            action: function() {
+                window.open('https://t.me/LBX_1a89BOT', '_blank');
+            }
         },
         {
-            name: "نبراس الإيمان",
-            description: "محاضرات ودروس دينية متنوعة",
-            icon: "fas fa-mosque"
-        },
-        {
-            name: "أفق الإبداع",
-            description: "إبداعات وفنون متنوعة",
-            icon: "fas fa-palette"
-        },
-        {
-            name: "رحلة المعرفة",
-            description: "رحلات استكشافية ووثائقيات",
-            icon: "fas fa-globe-asia"
-        },
-        {
-            name: "إشراقة الحكمة",
-            description: "حكم ومواعظ لتطوير الذات",
-            icon: "fas fa-lightbulb"
-        },
-        {
-            name: "ميدان التحدي",
-            description: "تحديات وألعاب تعليمية",
-            icon: "fas fa-trophy"
-        },
-        {
-            name: "ملتقى الثقافة",
-            description: "فعاليات ثقافية وأدبية",
-            icon: "fas fa-users"
-        },
-        {
-            name: "نافذة العلوم",
-            description: "اكتشافات واختراعات علمية",
-            icon: "fas fa-flask"
-        },
-        {
-            name: "رواق الفنون",
-            description: "فنون وإبداعات بصرية",
-            icon: "fas fa-paint-brush"
-        },
-        {
-            name: "صوت الحكمة",
-            description: "بودكاست وبرامج صوتية",
-            icon: "fas fa-podcast"
-        },
-        {
-            name: "مكتبة الأسرار",
-            description: "أسرار وخفايا العلوم",
-            icon: "fas fa-key"
+            name: "سلام على إل ياسين",
+            description: "قناة سلام على إل ياسين",
+            icon: "fas fa-broadcast-tower",
+            action: function() {
+                window.open('https://t.me/salam_ala_yasin', '_blank');
+            }
         }
     ];
     
@@ -916,11 +1025,43 @@ function initChannels() {
             <div class="channel-desc">${channel.description}</div>
         `;
         
-        channelCard.addEventListener('click', function() {
-            showNotification(`قناة ${channel.name} - يمكنك إضافة الرابط لاحقاً`, 'success');
-        });
+        channelCard.addEventListener('click', channel.action);
         
         channelsGrid.appendChild(channelCard);
+    });
+}
+
+// تهيئة الحسابات
+function initAccounts() {
+    const accounts = [
+        {
+            name: "ALI YOUSIF ☘️",
+            icon: "fas fa-user",
+            link: "https://t.me/LBX_1a"
+        },
+        {
+            name: "Mohammed",
+            icon: "fas fa-user-tie",
+            link: "https://t.me/ssd_had"
+        }
+    ];
+    
+    accountsGrid.innerHTML = '';
+    accounts.forEach(account => {
+        const accountCard = document.createElement('div');
+        accountCard.className = 'account-card';
+        accountCard.innerHTML = `
+            <div class="account-icon">
+                <i class="${account.icon}"></i>
+            </div>
+            <div class="account-name">${account.name}</div>
+        `;
+        
+        accountCard.addEventListener('click', function() {
+            window.open(account.link, '_blank');
+        });
+        
+        accountsGrid.appendChild(accountCard);
     });
 }
 
@@ -928,7 +1069,7 @@ function initChannels() {
 function initStats() {
     // تأثير عدّاد للإحصائيات
     animateCounter(usersCount, 12580);
-    animateCounter(channelsCount, 42);
+    animateCounter(channelsCount, 3);
     animateCounter(contentCount, 1560);
     animateCounter(speedCount, 120);
 }
@@ -964,6 +1105,33 @@ function initFloatingButtons() {
     infoBtn.addEventListener('click', function() {
         showNotification('منصة العاصفة - الإصدار 2.0 - تم التطوير بواسطة فريق العاصفة', 'success');
     });
+    
+    accountsBtn.addEventListener('click', function() {
+        initAccounts();
+        accountsContainer.style.display = 'flex';
+    });
+    
+    closeAccounts.addEventListener('click', function() {
+        accountsContainer.style.display = 'none';
+    });
+}
+
+// تهيئة تذكير الصلاة
+function initPrayerReminder() {
+    // إظهار التذكير كل 30 دقيقة
+    setInterval(() => {
+        prayerReminder.classList.add('show');
+    }, 30 * 60 * 1000);
+    
+    // إخفاء التذكير عند النقر على زر الإغلاق
+    closePrayer.addEventListener('click', function() {
+        prayerReminder.classList.remove('show');
+    });
+    
+    // إظهار التذكير لأول مرة بعد 5 ثواني من تحميل الصفحة
+    setTimeout(() => {
+        prayerReminder.classList.add('show');
+    }, 5000);
 }
 
 // إظهار الإشعارات
