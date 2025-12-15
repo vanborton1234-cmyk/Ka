@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشغل يوتيوب المخصص - عالي الدقة</title>
+    <title>المشغل القوي لليوتيوب - حماية عالية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* ---------------------------------------------------- */
-        /* 1. المتغيرات والألوان (وضع الإضاءة الليلي/النهاري) */
+        /* 1. المتغيرات والألوان الزاهية (مظهر احترافي وجذاب) */
         /* ---------------------------------------------------- */
         :root {
-            --main-font: 'Cairo', sans-serif; /* الخط الحديث المطلوب */
-            --decorative-font: 'Amiri', serif; /* خط الشريط الجانبي */
-            --bg-color: #f7f7f9; 
-            --text-color: #1a1a1a;
-            --primary-color: #ff0000; /* لون يوتيوب الأحمر */
+            --main-font: 'Cairo', sans-serif;
+            --decorative-font: 'Amiri', serif;
+            --bg-color: #f0f4f8; /* خلفية ناعمة */
+            --text-color: #1c2e4a;
+            --primary-color: #ff0000; /* يوتيوب الأحمر الزاهي */
+            --accent-color: #007bff; /* لون متحرك (أزرق نيون) */
             --secondary-color: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.15);
-            --sidebar-bg: #e8e8ed;
+            --sidebar-bg: #e0e6ec;
         }
 
         .dark-mode {
-            --bg-color: #1a1a2e; /* خلفية ليلية داكنة جداً */
-            --text-color: #e0e0e0;
-            --secondary-color: #2e2e4a;
+            --bg-color: #0d1117; /* خلفية داكنة جداً */
+            --text-color: #c9d1d9;
+            --secondary-color: #161b22;
             --shadow-color: rgba(255, 255, 255, 0.08);
-            --sidebar-bg: #2a2a44;
+            --sidebar-bg: #1f2a38;
         }
 
         /* ---------------------------------------------------- */
         /* 2. الأنماط العامة والهيكل والخط */
         /* ---------------------------------------------------- */
         body {
-            font-family: var(--main-font); /* تطبيق الخط الجديد على الكل */
+            font-family: var(--main-font);
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
@@ -42,24 +43,23 @@
             direction: rtl; 
             min-height: 100vh;
         }
-        
+
         /* ---------------------------------------------------- */
-        /* 3. الشريط الجانبي والمحتوى */
+        /* 3. الشريط الجانبي الثابت */
         /* ---------------------------------------------------- */
         .container { display: flex; }
-        
         .sidebar {
             width: 280px;
             background-color: var(--sidebar-bg);
             padding: 20px 15px;
-            box-shadow: 2px 0 10px var(--shadow-color);
+            box-shadow: 2px 0 15px var(--shadow-color);
             position: fixed; 
             height: 100%;
             text-align: center;
         }
 
         .decorative-text {
-            font-family: var(--decorative-font); /* استخدام الخط المزخرف هنا فقط */
+            font-family: var(--decorative-font);
             font-size: 1.6em;
             font-weight: 700;
             color: var(--primary-color);
@@ -70,29 +70,28 @@
             display: block;
             line-height: 1.8;
             background-color: var(--secondary-color);
-            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
-            animation: bounceIn 1s ease-out;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            animation: pulse 2s infinite; /* تأثير النبض العائم */
         }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
         }
 
         .main-content {
             margin-right: 280px; 
             flex-grow: 1;
-            padding: 30px;
+            padding: 40px;
             max-width: calc(100% - 280px);
         }
 
         /* ---------------------------------------------------- */
-        /* 4. الأزرار المتحركة العائمة (FABs) */
+        /* 4. الأزرار العائمة المتحركة (FABs) */
         /* ---------------------------------------------------- */
         .fab-group {
             position: fixed;
-            left: 30px; /* لتبتعد عن الشريط الجانبي */
+            left: 30px; 
             bottom: 30px;
             display: flex;
             flex-direction: column;
@@ -101,56 +100,48 @@
         }
 
         .fab {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5em;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
+            font-size: 1.6em;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* حركة متطورة */
             text-decoration: none;
         }
         .fab:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transform: scale(1.15) rotate(5deg);
         }
 
-        .fab-telegram-1 { background-color: #0088cc; animation: slideUp 0.8s ease-out; }
-        .fab-telegram-2 { background-color: #0088cc; animation: slideUp 1s ease-out; }
-        .fab-chat { background-color: #4CAF50; animation: slideUp 1.2s ease-out; }
-
-        @keyframes slideUp {
-            0% { transform: translateY(100px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
+        .fab-telegram-1 { background-color: #0088cc; }
+        .fab-telegram-2 { background-color: #0088cc; }
+        .fab-chat { background-color: #4CAF50; }
 
         /* ---------------------------------------------------- */
-        /* 5. التصميم الجمالي للمكونات */
+        /* 5. تصميم البطاقات والمكونات العائمة */
         /* ---------------------------------------------------- */
         .card {
             background-color: var(--secondary-color);
-            padding: 25px;
-            margin-bottom: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            transition: all 0.3s ease-in-out;
+            padding: 30px;
+            margin-bottom: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            transition: all 0.4s ease-in-out;
+            border-top: 5px solid var(--accent-color);
         }
         .card:hover {
-            box-shadow: 0 15px 40px var(--shadow-color);
+            transform: translateY(-5px); /* تأثير عائم جذاب */
+            box-shadow: 0 20px 50px var(--shadow-color);
         }
         
-        .input-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+        .input-group { display: flex; gap: 10px; align-items: center; }
         .input-group input, .input-group button {
             border: none;
-            padding: 15px 20px;
-            border-radius: 10px;
+            padding: 16px 22px;
+            border-radius: 12px;
             font-size: 1.1em;
             font-family: var(--main-font);
             transition: all 0.3s;
@@ -159,12 +150,12 @@
             flex-grow: 1;
             background-color: var(--bg-color);
             color: var(--text-color);
-            border: 2px solid transparent;
+            border: 3px solid transparent;
         }
         .input-group input:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
         }
         .input-group button {
             background-color: var(--primary-color);
@@ -174,98 +165,98 @@
         }
         .input-group button:hover {
             background-color: #cc0000;
-            transform: translateY(-2px);
+            transform: scale(1.05); 
         }
 
-        /* واجهة YouTube Music المتطورة */
-        .youtube-music-icon {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            border-top: 1px solid var(--text-color);
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        .youtube-music-icon:hover { opacity: 1; }
-        .youtube-music-icon i { color: #FF0000; font-size: 2.5em; margin-bottom: 5px; }
-        .youtube-music-icon p { font-size: 0.9em; font-weight: bold; margin: 0; }
-
-        /* زر تبديل الإضاءة */
-        .theme-switch {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            cursor: pointer;
-            padding: 10px 15px;
-            background-color: var(--secondary-color);
-            border: 1px solid var(--text-color);
-            border-radius: 25px;
-            box-shadow: 0 4px 10px var(--shadow-color);
-            color: var(--text-color);
-            font-size: 1em;
-            transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
-        }
-        
         /* مشغل الفيديو الفارغ */
         .video-placeholder {
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            background-color: var(--bg-color);
-            border-radius: 10px;
+            padding-bottom: 56.25%; 
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--sidebar-bg) 100%);
+            border-radius: 15px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: var(--text-color);
             font-size: 1.5em;
-            border: 2px dashed var(--primary-color);
+            border: 3px dashed var(--accent-color);
             height: 0;
             position: relative;
         }
         #youtube-player {
             position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 10;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 6. نافذة القفل الأمني (Access Gate) */
+        /* ---------------------------------------------------- */
+        #access-gate {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+        .gate-card {
+            background-color: #1c1c1c;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gate-card input {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--primary-color);
+            background-color: #0d1117;
+            color: white;
+            width: 250px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        .gate-card button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
             border: none;
-            z-index: 10;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
+        .gate-card button:hover { background-color: #cc0000; }
         
-        /* ---------------------------------------------------- */
-        /* 6. استجابة الأبعاد (Responsive) */
-        /* ---------------------------------------------------- */
-        @media (max-width: 992px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                border-left: none;
-                border-bottom: 2px solid var(--primary-color);
-            }
-            .main-content {
-                margin-right: 0;
-                max-width: 100%;
-            }
-            .container {
-                flex-direction: column;
-            }
-            .theme-switch {
-                top: 10px;
-                left: 10px;
-                right: auto;
-            }
-            .fab-group {
-                bottom: 10px;
-                left: 10px;
-            }
-        }
-
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="access-gate">
+        <div class="gate-card">
+            <h2>🔐 أدخل رمز الوصول لمرة واحدة</h2>
+            <p>يرجى إدخال الرمز السري للمتابعة. لن يُطلب منك هذا الرمز مرة أخرى.</p>
+            <input type="text" id="access-code" placeholder="AXXX1XXXSDX6" maxlength="11">
+            <button onclick="checkAccessCode()">فتح الموقع</button>
+            <p id="gate-message" style="color: yellow; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <div class="container" id="site-content" style="opacity: 0;">
         
         <div class="sidebar">
             <div class="sidebar-content">
@@ -273,9 +264,13 @@
                     هل صليت اليوم على محمد وال محمد
                 </p>
             </div>
-            <div class="youtube-music-icon">
-                <i class="fab fa-youtube"></i>
-                <p>واجهة YouTube Music المتطورة</p>
+            <div style="margin-top: 30px;">
+                <h3 style="color: var(--accent-color);">معلومات المشغل</h3>
+                <p style="font-size: 0.9em;">
+                    مشغل عالي السرعة لجميع صيغ روابط يوتيوب.
+                    <br>
+                    <i class="fas fa-shield-alt"></i> حماية عالية وسرعة فائقة.
+                </p>
             </div>
         </div>
 
@@ -295,18 +290,18 @@
 
         <div class="main-content">
             
-            <h1>مشغل يوتيوب عالي الدقة والمميزات</h1>
+            <h1>🎬 مشغل يوتيوب القوي (شامل جميع الروابط)</h1>
 
             <div class="card">
-                <h3>تشغيل عبر لصق الرابط</h3>
+                <h3>تشغيل فائق السرعة عبر لصق الرابط</h3>
                 <div class="input-group">
-                    <input type="url" id="link-input" placeholder="ألصق رابط فيديو يوتيوب هنا وشغّل...">
-                    <button onclick="playLink()">تشغيل سريع</button>
+                    <input type="url" id="link-input" placeholder="ألصق رابط فيديو يوتيوب هنا وشغّل... (يدعم جميع الصيغ)">
+                    <button onclick="playLink()"><i class="fas fa-rocket"></i> تشغيل سريع</button>
                 </div>
             </div>
 
             <div class="card player-area">
-                <h3>نافذة المشغل القوي</h3>
+                <h3>نافذة المشغل القوي (HDR Ready)</h3>
                 <div class="video-placeholder" id="player-placeholder">
                     <i class="fas fa-video"></i> ألصق رابطاً لبدء التشغيل عالي الدقة
                     <div id="youtube-player"></div>
@@ -314,13 +309,27 @@
             </div>
 
             <div class="card">
-                <h3>بحث سريع ومباشر (يتطلب API Key)</h3>
-                <div class="input-group">
+                <h3>بحث سريع ومباشر في يوتيوب (يتطلب API Key)</h3>
+                <div class="input-group" style="margin-bottom: 15px;">
                     <input type="text" id="search-input" placeholder="اكتب اسم الفيديو للبحث مباشرة...">
-                    <button onclick="searchVideos()">ابحث</button>
+                    <button onclick="searchVideos()"><i class="fas fa-search"></i> ابحث</button>
                 </div>
-                <div id="search-results">
+
+                <div id="search-api-setup">
+                    <h4>تفعيل ميزة البحث (هام)</h4>
+                    <p style="font-size: 0.9em; line-height: 1.6;">
+                        لتشغيل البحث، يجب عليك إدخال مفتاح YouTube Data API Key لأسباب أمنية.
+                    </p>
+                    <div class="input-group">
+                        <input type="text" id="api-key-input" placeholder="ألصق مفتاح YouTube API Key هنا...">
+                        <button onclick="saveApiKey()">حفظ وتفعيل</button>
                     </div>
+                    
+                    <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="display: inline-block; margin-top: 10px; color: var(--accent-color); text-decoration: none; font-weight: bold;">
+                        <i class="fas fa-external-link-alt"></i> اضغط هنا للحصول على مفتاح API الخاص بك
+                    </a>
+                    <div id="search-results"></div>
+                </div>
             </div>
 
         </div>
@@ -329,14 +338,43 @@
 
     <script>
         // ----------------------------------------------------
-        // جافاسكريبت لتشغيل الميزات التفاعلية
+        // جافاسكريبت لتشغيل الميزات التفاعلية والأمن
         // ----------------------------------------------------
 
-        // 1. نظام تبديل الإضاءة الليلي/النهاري
+        // 1. نظام القفل الأمني لمرة واحدة (Local Storage)
+        const CORRECT_CODE = 'A8571342SD96';
+        const ACCESS_KEY = 'siteAccessGranted';
+
+        function checkAccessCode() {
+            const inputCode = document.getElementById('access-code').value.toUpperCase().trim();
+            const messageElement = document.getElementById('gate-message');
+
+            if (inputCode === CORRECT_CODE) {
+                // منح الصلاحية وحفظها
+                localStorage.setItem(ACCESS_KEY, 'true');
+                document.getElementById('access-gate').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('access-gate').style.display = 'none';
+                    document.getElementById('site-content').style.opacity = '1';
+                }, 500);
+            } else {
+                messageElement.textContent = 'الرمز غير صحيح. حاول مرة أخرى.';
+            }
+        }
+
+        function initialAccessCheck() {
+            if (localStorage.getItem(ACCESS_KEY) === 'true') {
+                document.getElementById('access-gate').style.display = 'none';
+                document.getElementById('site-content').style.opacity = '1';
+            }
+        }
+        // تحقق عند تحميل الصفحة
+        window.onload = initialAccessCheck;
+
+
+        // 2. نظام تبديل الإضاءة الليلي/النهاري
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
-        const playerPlaceholder = document.getElementById('player-placeholder');
-
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
             
@@ -348,19 +386,18 @@
         });
 
 
-        // 2. تفعيل مشغل يوتيوب API
+        // 3. تفعيل مشغل يوتيوب API (لجميع صيغ الروابط)
         let player;
         let isPlayerReady = false;
 
         function onYouTubeIframeAPIReady() {
-            // يتم تهيئة المشغل بدون فيديو مبدئي
             player = new YT.Player('youtube-player', {
                 height: '100%',
                 width: '100%',
-                videoId: null, // لا يوجد فيديو مبدئي
+                videoId: null,
                 playerVars: {
                     'playsinline': 1,
-                    'autoplay': 1, // التشغيل التلقائي عند التحميل
+                    'autoplay': 1, 
                     'modestbranding': 1, 
                     'rel': 0 
                 },
@@ -373,21 +410,21 @@
         
         function onPlayerReady(event) {
             isPlayerReady = true;
-            // للتأكد من اختفاء عنصر الـ placeholder عند جاهزية المشغل
-            playerPlaceholder.style.zIndex = 1; 
-            playerPlaceholder.style.border = 'none';
+            document.getElementById('player-placeholder').style.zIndex = 1; 
+            document.getElementById('player-placeholder').style.border = 'none';
         }
 
         function onPlayerStateChange(event) {
             // إخفاء الـ placeholder عند بدء التشغيل
             if (event.data === YT.PlayerState.PLAYING) {
-                playerPlaceholder.style.zIndex = -1; 
+                document.getElementById('player-placeholder').style.zIndex = -1; 
             }
         }
 
 
-        // 3. وظيفة استخراج وتشغيل الفيديو من الرابط
+        // 4. وظيفة استخراج وتشغيل الفيديو من الرابط (يدعم جميع الصيغ)
         function getVideoId(url) {
+            // وظيفة مطورة لاستخراج المعرّف من مختلف تنسيقات الروابط
             const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|\w\S*?v=|v\/|u\/\w\/|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/;
             const match = url.match(regex);
             return match ? match[1] : null;
@@ -398,46 +435,64 @@
             const videoId = getVideoId(link);
 
             if (videoId && isPlayerReady) {
-                playerPlaceholder.innerHTML = ''; // إزالة النص عند التشغيل
+                document.getElementById('player-placeholder').innerHTML = '';
                 player.loadVideoById(videoId);
-                playerPlaceholder.style.zIndex = 10; 
-                playerPlaceholder.style.background = 'black'; // خلفية المشغل
-                playerPlaceholder.style.border = 'none';
+                document.getElementById('player-placeholder').style.zIndex = 10; 
+                document.getElementById('player-placeholder').style.background = 'black';
             } else {
-                alert('الرجاء إدخال رابط يوتيوب صالح أو الانتظار حتى تهيئة المشغل.');
+                alert('الرجاء إدخال رابط يوتيوب صالح. تأكد من تهيئة المشغل (الانتظار ثانية واحدة).');
             }
         }
         
-        // 4. وظيفة البحث المباشر (تتطلب API Key و Back-End)
+        // 5. وظائف API والبحث (لجعل الميزة عاملة بمجرد لصق المفتاح)
+        const API_KEY_STORAGE = 'youtubeApiKey';
+        let storedApiKey = localStorage.getItem(API_KEY_STORAGE);
+
+        // وظيفة لحفظ المفتاح وتفعيله
+        function saveApiKey() {
+            const apiKeyInput = document.getElementById('api-key-input').value.trim();
+            if (apiKeyInput.length > 20) {
+                localStorage.setItem(API_KEY_STORAGE, apiKeyInput);
+                storedApiKey = apiKeyInput;
+                alert('تم حفظ مفتاح API بنجاح! يمكنك الآن استخدام البحث.');
+                document.getElementById('api-key-input').placeholder = 'تم تفعيل المفتاح بنجاح!';
+                document.getElementById('api-key-input').value = '';
+            } else {
+                alert('الرجاء إدخال مفتاح API صالح وطويل.');
+            }
+        }
+
+        // ملاحظة هامة: هذا الجزء هو واجهة أمامية فقط.
+        // لكي يعمل البحث بأمان، يجب أن يتم إرسال هذا المفتاح إلى خادم خلفي (Back-End Server)
+        // يقوم بالاستعلام عن يوتيوب ويعيد لك النتائج (هذا الكود يوضح الواجهة والمنطق فقط).
         function searchVideos() {
             const query = document.getElementById('search-input').value;
             const resultsContainer = document.getElementById('search-results');
-            resultsContainer.innerHTML = `<p style="color: var(--primary-color);">
-                🔍 جاري البحث عن: ${query}
-                (ملاحظة: هذا يتطلب API Key و Back-End ليعمل بشكل حقيقي).
-            </p>`;
 
-            // محاكاة النتائج للتصميم (يجب استبدالها بطلب خادم حقيقي)
-            const mockResults = [
-                { id: '2DkC_F-V1aE', title: 'فيديو مقترح رقم 1 بناءً على بحثك' },
-                { id: '1uC4nS1b7tQ', title: 'فيديو مقترح رقم 2 من يوتيوب' },
-                { id: 'jS4hX27p1cI', title: 'نتيجة بحث جميلة وعالية الجودة' }
-            ];
+            if (!storedApiKey) {
+                alert('الرجاء حفظ مفتاح API أولاً لتشغيل ميزة البحث.');
+                return;
+            }
 
-            mockResults.forEach(video => {
-                const item = document.createElement('div');
-                item.classList.add('video-item', 'card');
-                item.setAttribute('onclick', `player.loadVideoById('${video.id}');`);
-                item.style.cursor = 'pointer';
-                item.style.padding = '10px';
-                item.style.margin = '10px 0';
-                item.style.fontSize = '0.9em';
-                item.innerHTML = `<i class="fas fa-play-circle" style="color: var(--primary-color); margin-left: 10px;"></i> ${video.title}`;
-                resultsContainer.appendChild(item);
-            });
+            if (query.length < 3) {
+                resultsContainer.innerHTML = `<p style="color: var(--primary-color);">
+                    الرجاء إدخال كلمة بحث لا تقل عن ثلاثة أحرف.
+                </p>`;
+                return;
+            }
+
+            resultsContainer.innerHTML = `<p style="color: var(--accent-color);">
+                🔍 جاري إرسال الطلب باستخدام مفتاحك (${storedApiKey.substring(0, 5)}...):
+                <br>
+                **ملاحظة:** ليعمل البحث بشكل كامل، يجب ربط مفتاح API هذا بـ <span style="font-weight: bold;">خادم وسيط (Back-End Proxy)</span> لإجراء استعلام آمن ليوتيوب.
+                </p>`;
+            
+            // هنا، في كودك النهائي على الخادم، يجب استبدال النص أعلاه برمز AJAX/Fetch
+            // يرسل الطلب للخادم الوسيط الذي بدوره يستعلم عن YouTube Data API.
+
         }
 
-        // 5. تحميل مكتبة يوتيوب API
+        // 6. تحميل مكتبة يوتيوب API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
