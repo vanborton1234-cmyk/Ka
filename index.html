@@ -249,7 +249,7 @@
     <div id="access-gate">
         <div class="gate-card">
             <h2>🔐 أدخل رمز الوصول لمرة واحدة</h2>
-            <p>الرمز هو: <span style="color: var(--primary-color); font-weight: bold;">A8571342SD6</span> (11 خانة)</p>
+            <p>الرمز هو: <span style="color: var(--primary-color); font-weight: bold;">A6791637SD6</span> (11 خانة)</p>
             <input type="text" id="access-code" placeholder="AXXX1XXXSDX6" maxlength="11">
             <button onclick="checkAccessCode()">فتح الموقع</button>
             <p id="gate-message" style="color: yellow; margin-top: 10px;"></p>
@@ -342,7 +342,7 @@
         // ----------------------------------------------------
 
         // 1. نظام القفل الأمني لمرة واحدة (Local Storage)
-        const CORRECT_CODE = 'A8571342SD6'; // تم التعديل إلى 11 خانة
+        const CORRECT_CODE = 'A6791637SD6'; // الرمز المُصحح ليتوافق مع طلبك
         const ACCESS_KEY = 'siteAccessGranted';
 
         function checkAccessCode() {
@@ -422,16 +422,20 @@
         }
 
 
-        // 4. وظيفة استخراج وتشغيل الفيديو من الرابط (يدعم جميع الصيغ)
+        // 4. وظيفة استخراج وتشغيل الفيديو من الرابط (تم تقويتها)
         function getVideoId(url) {
-            // وظيفة مطورة لاستخراج المعرّف من مختلف تنسيقات الروابط (تم الإبقاء على الوظيفة الداعمة لجميع الصيغ)
+            if (!url) return null;
+            // يتم تنظيف الرابط من المسافات قبل المعالجة
+            const cleanedUrl = url.trim(); 
+            // وظيفة مطورة لاستخراج المعرّف من مختلف تنسيقات الروابط
             const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|\w\S*?v=|v\/|u\/\w\/|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/;
-            const match = url.match(regex);
+            const match = cleanedUrl.match(regex);
             return match ? match[1] : null;
         }
 
         function playLink() {
-            const link = document.getElementById('link-input').value;
+            // تم إضافة .trim() هنا للتأكد من نظافة الرابط المُلصق
+            const link = document.getElementById('link-input').value.trim(); 
             const videoId = getVideoId(link);
 
             if (videoId && isPlayerReady) {
@@ -440,7 +444,7 @@
                 document.getElementById('player-placeholder').style.zIndex = 10; 
                 document.getElementById('player-placeholder').style.background = 'black';
             } else {
-                alert('الرجاء إدخال رابط يوتيوب صالح. تأكد من تهيئة المشغل (الانتظار ثانية واحدة).');
+                alert('عذراً! لم نتمكن من العثور على معرّف فيديو يوتيوب صالح في هذا الرابط. الرجاء التأكد من نسخ الرابط بشكل كامل وصحيح.');
             }
         }
         
@@ -478,18 +482,12 @@
                 return;
             }
 
-            // هذا هو القسم الذي سيجعله "عاملاً" من حيث الواجهة والمنطق:
-            // في مشروعك الفعلي على خادم، يجب أن يتم إرسال المفتاح وكلمة البحث إلى
-            // خادم وسيط (Back-End Proxy) يقوم بالاتصال الآمن بـ YouTube Data API.
-
             resultsContainer.innerHTML = `<p style="color: var(--accent-color); font-weight: bold;">
                 ✅ المفتاح مُفعّل: ${storedApiKey.substring(0, 5)}...
                 <br>
                 **لتظهر النتائج هنا:** يجب الآن ربط هذا الكود بـ <span style="font-weight: bold;">خادم وسيط (Back-End Proxy)</span> لإجراء استعلام آمن ليوتيوب.
                 </p>`;
             
-            // هنا، يمكنك إضافة كود Fetch/AJAX للخادم الخاص بك لإظهار النتائج.
-
         }
 
         // 6. تحميل مكتبة يوتيوب API
